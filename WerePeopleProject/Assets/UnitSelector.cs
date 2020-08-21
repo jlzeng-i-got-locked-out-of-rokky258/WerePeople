@@ -18,7 +18,7 @@ public class UnitSelector : MonoBehaviour
             {
                 GameObject obj = hit.transform.gameObject;
 
-                PlayerActions actions = obj.GetComponent<PlayerActions>()
+                PlayerActions actions = obj.GetComponent<PlayerActions>();
                 if (actions != null && actions.IsActive())
                 {
                     gameController.selectedUnit = obj;
