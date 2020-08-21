@@ -5,3 +5,5 @@ WerePeopleProject/Library/SourceAssetDB
 WerePeopleProject/Library/SourceAssetDB
 WerePeopleProject/Library/shadercompiler-UnityShaderCompiler.exe0.log
 WerePeopleProject/Library/ArtifactDB
+*.meta
+*.json
