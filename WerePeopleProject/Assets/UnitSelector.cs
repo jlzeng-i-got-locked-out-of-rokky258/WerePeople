@@ -29,6 +29,9 @@ public class UnitSelector : MonoBehaviour
                     gameController.selectedUnit = obj;
                 }
             }
+            else{
+                gameController.selectedUnit = null;
+            }
         }
         
     }
