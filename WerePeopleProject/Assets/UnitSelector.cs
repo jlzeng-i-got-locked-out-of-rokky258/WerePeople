@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class UnitSelector : MonoBehaviour
 {
-    public GameController gameController;
+    private GameController gameController;
     
+    void Start()
+    {
+        gameController = GameController.instance();
+    }
+
     // Update is called once per frame
     void Update()
     {

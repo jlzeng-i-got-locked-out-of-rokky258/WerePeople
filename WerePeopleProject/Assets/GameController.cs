@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
     public GameObject selectedUnit;
+    static GameObject _instance;
 
-    // Start is called before the first frame update
-    void Start()
+    public static GameController instance()
     {
-        
+        if (_instance == null)
+        {
+            _instance = new GameObject("Game Controller");
+            _instance.AddComponent<GameController>();
+        }
+        return _instance.GetComponent<GameController>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 }

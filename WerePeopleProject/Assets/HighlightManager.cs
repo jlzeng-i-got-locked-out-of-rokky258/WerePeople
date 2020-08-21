@@ -5,11 +5,11 @@ using UnityEngine;
 public class HighlightManager : MonoBehaviour
 {
 
-    public GameController gameController;
+    private GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameController = GameController.instance();
     }
 
     // Update is called once per frame

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Class to handle the actions which a given unit can take.
+
 public class PlayerActions : MonoBehaviour
 {
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +17,7 @@ public class PlayerActions : MonoBehaviour
     {
         
     }
+
     // Whether the unit can be activated.
     public bool IsActive()
     {
