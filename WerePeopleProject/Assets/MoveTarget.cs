@@ -16,4 +16,9 @@ public class MoveTarget : MonoBehaviour
         
     }
 
+
+    public bool IsPassable()
+    {
+        return true;
+    }
 }

@@ -16,4 +16,9 @@ public class GameController : MonoBehaviour
         }
         return _instance.GetComponent<GameController>();
     }
+
+    public void MoveUnitTo(MoveTarget tile)
+    {
+        selectedUnit.GetComponent<PlayerActions>().MoveTo(tile);
+    }
 }

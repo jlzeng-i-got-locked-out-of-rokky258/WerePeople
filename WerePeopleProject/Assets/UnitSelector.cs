@@ -24,12 +24,19 @@ public class UnitSelector : MonoBehaviour
                 GameObject obj = hit.transform.gameObject;
 
                 PlayerActions actions = obj.GetComponent<PlayerActions>();
-                if (actions != null && actions.IsActive())
+                if (actions != null && actions.IsActive()) // Clicked an active player unit
                 {
                     gameController.selectedUnit = obj;
                 }
+
+                MoveTarget tile = obj.GetComponent<MoveTarget>();
+                if (tile != null && tile.IsPassable())
+                {
+                    gameController.MoveUnitTo(tile);
+                    gameController.selectedUnit = null;
+                }
             }
-            else{
+            else {
                 gameController.selectedUnit = null;
             }
         }

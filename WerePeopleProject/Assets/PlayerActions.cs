@@ -23,4 +23,9 @@ public class PlayerActions : MonoBehaviour
     {
         return true;
     }
+
+    public void MoveTo(MoveTarget tile)
+    {
+        this.gameObject.transform.position = tile.gameObject.transform.position;
+    }
 }
