@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
+    private Vector3 offset;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        offset = new Vector3(0f, 1f, 0f);
     }
 
     // Update is called once per frame
@@ -26,6 +28,6 @@ public class PlayerActions : MonoBehaviour
 
     public void MoveTo(MoveTarget tile)
     {
-        this.gameObject.transform.position = tile.gameObject.transform.position;
+        this.gameObject.transform.position = tile.gameObject.transform.position + offset;
     }
 }
