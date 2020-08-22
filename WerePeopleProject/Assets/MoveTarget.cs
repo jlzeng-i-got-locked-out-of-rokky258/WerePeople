@@ -7,7 +7,9 @@ public class MoveTarget : MonoBehaviour
 
     public Vector2 gridCoords;
     public bool moveHighlight;
+    public bool attackHighlight;
     public GameObject moveHighlightObject;
+    public GameObject attackHighlightObject;
     public GameObject occupant;
 
     // Start is called before the first frame update
