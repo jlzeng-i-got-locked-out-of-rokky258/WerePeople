@@ -71,7 +71,7 @@ public class PlayerActions : MonoBehaviour
         Vector2 tileCoords = tile.gridCoords;
         Vector2 gridCoords = location.gridCoords;
         //return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
-        return !tile.IsPassable() && ((Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) = attackRange));
+        return !tile.IsPassable() && ((Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) == attackRange));
     }
     public void MoveTo(MoveTarget tile)
     {
