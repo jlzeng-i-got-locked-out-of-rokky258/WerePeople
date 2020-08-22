@@ -747,6 +747,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 708629895467427225, guid: 22ace074b7c65ce49b0ec5b1d95cb981,
+        type: 3}
+      propertyPath: movementLength
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4123696387757737152, guid: 22ace074b7c65ce49b0ec5b1d95cb981,
         type: 3}
       propertyPath: m_LocalPosition.x

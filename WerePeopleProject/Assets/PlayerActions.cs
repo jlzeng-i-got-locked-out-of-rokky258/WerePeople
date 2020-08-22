@@ -20,10 +20,14 @@ public class PlayerActions : MonoBehaviour
 
     public BillboardFace sprite;
 
+    public int movementLength, attackRange;
+
     // Variables related to grid positioning.
     private MoveTarget location;
 
     private float time = 0;
+
+    private bool hasMoved, hasAttacked = false;
     
     // Start is called before the first frame update
     void Start()
@@ -47,7 +51,7 @@ public class PlayerActions : MonoBehaviour
     // Whether the unit can be activated.
     public bool IsActive()
     {
-        return true;
+        return !hasMoved || !hasAttacked;
     }
 
 
@@ -59,12 +63,19 @@ public class PlayerActions : MonoBehaviour
         if (location == null) return tile.IsPassable();
         Vector2 tileCoords = tile.gridCoords;
         Vector2 gridCoords = location.gridCoords;
-        return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
+        //return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
+        return tile.IsPassable() && ((Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) <= movementLength));
     }
-
+      public bool CanAttack(MoveTarget tile)
+    {
+        Vector2 tileCoords = tile.gridCoords;
+        Vector2 gridCoords = location.gridCoords;
+        //return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
+        return !tile.IsPassable() && ((Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) = attackRange));
+    }
     public void MoveTo(MoveTarget tile)
     {
-        if (CanMoveTo(tile))
+        if (CanMoveTo(tile) && !hasMoved)
         {
             if (location != null)
             {
