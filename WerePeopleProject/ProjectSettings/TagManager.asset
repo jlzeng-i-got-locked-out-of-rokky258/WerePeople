@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Battle
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Battle Scene
+    uniqueID: 2420345431
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
