@@ -21,7 +21,7 @@ public class BillboardFace : MonoBehaviour
 	}
  
     //Orient the camera after all movement is completed this frame to avoid jittering
-    void LateUpdate(){
+    void Update(){
         if(amActive==true){
         	myContainer.transform.LookAt(myContainer.transform.position + m_Camera.transform.rotation * Vector3.back, m_Camera.transform.rotation * Vector3.up);
 	    }
