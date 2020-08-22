@@ -34,6 +34,8 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow) && !(transform.position.y < 1))
         {
             transform.RotateAround(target.transform.position, Vector3.left, 20 * rotationSens);
+            prevHeight = transform.position.y;
+            tranPosition = transform.position;
         }
         if (Input.GetKey(KeyCode.RightArrow) && !(transform.position.z > 0 && transform.position.x > 0)){
             transform.RotateAround(target.transform.position, Vector3.down, 20 * rotationSens);
