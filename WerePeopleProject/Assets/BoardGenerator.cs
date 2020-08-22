@@ -27,7 +27,9 @@ public class BoardGenerator : MonoBehaviour
             for (int j = 0; j < height; j ++)
             {
                 GameObject newTarget = Instantiate(boardMoveTarget, transform.position + new Vector3(i, 0, j), Quaternion.identity);
-                board[i, j] = newTarget.GetComponent<MoveTarget>();
+                MoveTarget moveTarget = newTarget.GetComponent<MoveTarget>();
+                moveTarget.gridCoords = new Vector2(i, j);
+                board[i, j] = moveTarget;
             }
         }
     }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MoveTarget : MonoBehaviour
 {
+
+    public Vector2 gridCoords;
+
     // Start is called before the first frame update
     void Start()
     {

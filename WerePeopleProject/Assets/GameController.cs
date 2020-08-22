@@ -19,6 +19,6 @@ public class GameController : MonoBehaviour
 
     public void MoveUnitTo(MoveTarget tile)
     {
-        selectedUnit.GetComponent<PlayerActions>().MoveTo(tile);
+        selectedUnit?.GetComponent<PlayerActions>().MoveTo(tile);
     }
 }
