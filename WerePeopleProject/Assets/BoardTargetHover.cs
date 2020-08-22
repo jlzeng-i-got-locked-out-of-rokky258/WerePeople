@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightManager : MonoBehaviour
+public class BoardTargetHover : MonoBehaviour
 {
 
     private GameController gameController;
-    public SpriteRenderer sprite;
+    public GameObject moveIcon;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +16,12 @@ public class HighlightManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = gameController.selectedUnit == this.gameObject ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(1.0f, 1.0f, 1.0f);
-       
-        sprite.color = gameController.hovered == this.gameObject ? Color.red : Color.white;
+        if (gameController.hovered == gameObject)
+        {
+            moveIcon.GetComponent<SpriteRenderer>().color = Color.blue;
+        } else
+        {
+            moveIcon.GetComponent<SpriteRenderer>().color = Color.cyan;
+        }
     }
 }

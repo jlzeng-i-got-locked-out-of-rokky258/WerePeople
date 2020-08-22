@@ -14,32 +14,33 @@ public class UnitSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        
+        RaycastHit hit;
+        Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
         {
-            RaycastHit hit;
-            Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            GameObject obj = hit.transform.gameObject;
+            gameController.hovered = obj;
 
-            if (Physics.Raycast(ray, out hit))
+            PlayerActions actions = obj.GetComponent<PlayerActions>();
+            MoveTarget tile = obj.GetComponent<MoveTarget>();
+
+            if (Input.GetMouseButtonDown(0))
             {
-                GameObject obj = hit.transform.gameObject;
-
-                PlayerActions actions = obj.GetComponent<PlayerActions>();
+                
                 if (actions != null && actions.IsActive()) // Clicked an active player unit
                 {
                     gameController.selectedUnit = obj;
-                }
-
-                MoveTarget tile = obj.GetComponent<MoveTarget>();
-                if (tile != null && tile.IsPassable())
+                } else if (tile != null && tile.IsPassable())
                 {
                     gameController.MoveUnitTo(tile);
                     gameController.selectedUnit = null;
+                } else
+                {
+                    gameController.selectedUnit = null;
                 }
             }
-            else {
-                gameController.selectedUnit = null;
-            }
         }
-        
     }
 }

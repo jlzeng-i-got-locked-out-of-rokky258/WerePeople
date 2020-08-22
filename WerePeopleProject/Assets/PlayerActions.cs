@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Principal;
 using UnityEngine;
 
 // Class to handle the actions which a given unit can take.
@@ -20,8 +21,7 @@ public class PlayerActions : MonoBehaviour
     public BillboardFace sprite;
 
     // Variables related to grid positioning.
-    private Vector2 gridCoords;
-    private bool placedOnGrid = false;
+    private MoveTarget location;
 
     private float time = 0;
     
@@ -56,16 +56,22 @@ public class PlayerActions : MonoBehaviour
     // CanMoveTo is also used to figure out which grid tiles to highlight for potential movement.
     public bool CanMoveTo(MoveTarget tile)
     {
+        if (location == null) return tile.IsPassable();
         Vector2 tileCoords = tile.gridCoords;
-        return !placedOnGrid || (Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1);
+        Vector2 gridCoords = location.gridCoords;
+        return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
     }
 
     public void MoveTo(MoveTarget tile)
     {
         if (CanMoveTo(tile))
         {
-            placedOnGrid = true;
-            gridCoords = tile.gridCoords;
+            if (location != null)
+            {
+                location.occupant = null;
+            }
+            location = tile;
+            location.occupant = this.gameObject;
 
             lastPosition = targetPosition;
             targetPosition = tile.gameObject.transform.position + offset;
@@ -75,7 +81,7 @@ public class PlayerActions : MonoBehaviour
         else
         {
             Debug.Log("Can't move there!");
-            Debug.Log(gridCoords);
+            Debug.Log(location.gridCoords);
             Debug.Log(tile.gridCoords);
         }
     }

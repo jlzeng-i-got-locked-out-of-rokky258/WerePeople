@@ -6,6 +6,9 @@ public class MoveTarget : MonoBehaviour
 {
 
     public Vector2 gridCoords;
+    public bool moveHighlight;
+    public GameObject moveHighlightObject;
+    public GameObject occupant;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +19,12 @@ public class MoveTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        moveHighlightObject.GetComponent<SpriteRenderer>().enabled = moveHighlight;
     }
 
 
     public bool IsPassable()
     {
-        return true;
+        return occupant == null;
     }
 }

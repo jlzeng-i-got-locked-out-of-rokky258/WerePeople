@@ -5,7 +5,16 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject selectedUnit;
+    public BoardGenerator board;
+    public GameObject hovered;
     static GameObject _instance;
+
+    public void Update()
+    {
+        board.highlightMoveable(selectedUnit?.GetComponent<PlayerActions>());
+    }
+
+
 
     public static GameController instance()
     {

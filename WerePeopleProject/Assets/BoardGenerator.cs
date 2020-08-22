@@ -7,9 +7,11 @@ public class BoardGenerator : MonoBehaviour
 
     MoveTarget[,] board;
     public GameObject boardMoveTarget;
+    private int width, height;
     // Start is called before the first frame update
     void Start()
     {
+        GameController.instance().board = this;
         MakeBoard(8, 8);
     }
 
@@ -19,8 +21,9 @@ public class BoardGenerator : MonoBehaviour
         
     }
 
-    public void MakeBoard(int width, int height)
+    public void MakeBoard(int _width, int _height)
     {
+        width = _width; height = _height;
         board = new MoveTarget[width, height];
         for (int i = 0; i < width; i ++)
         {
@@ -30,6 +33,17 @@ public class BoardGenerator : MonoBehaviour
                 MoveTarget moveTarget = newTarget.GetComponent<MoveTarget>();
                 moveTarget.gridCoords = new Vector2(i, j);
                 board[i, j] = moveTarget;
+            }
+        }
+    }
+    
+    public void highlightMoveable(PlayerActions active)
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                board[i, j].moveHighlight = active != null && active.CanMoveTo(board[i, j]);
             }
         }
     }
