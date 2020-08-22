@@ -14,12 +14,16 @@ public class PlayerActions : MonoBehaviour
     private Vector3 lastPosition;
     private float percentToTarget;
     private float percentToTargetPerSecond;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 0.5f;
     private float secondsToTarget = 1;
+
+    public BillboardFace sprite;
 
     // Variables related to grid positioning.
     private Vector2 gridCoords;
     private bool placedOnGrid = false;
+
+    private float time = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -33,8 +37,11 @@ public class PlayerActions : MonoBehaviour
     void Update()
     {
         gameObject.transform.position = Vector3.Lerp(lastPosition, targetPosition, percentToTarget);
+        sprite.wiggle = (float) Math.Sin(time) * 5f;
         //Debug.Log(secondsToTarget);
         percentToTarget = (float) Math.Min(percentToTarget + (1f / secondsToTarget) * Time.deltaTime, 1);
+
+        time += Time.deltaTime * 40f *  (float) (percentToTarget < 0.99 ? 1 : 0.05);
     }
 
     // Whether the unit can be activated.
