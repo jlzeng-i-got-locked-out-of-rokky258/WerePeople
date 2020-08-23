@@ -8,6 +8,7 @@ public class BoardGenerator : MonoBehaviour
     MoveTarget[,] board;
     public GameObject boardMoveTarget;
     private int width, height;
+    public GameObject enemyPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +34,11 @@ public class BoardGenerator : MonoBehaviour
                 MoveTarget moveTarget = newTarget.GetComponent<MoveTarget>();
                 moveTarget.gridCoords = new Vector2(i, j);
                 board[i, j] = moveTarget;
+                if (Random.Range(0.0f, 1.0f) > 0.1)
+                {
+                    EnemyActions enemy = Instantiate(enemyPrefab).GetComponent<EnemyActions>();
+                    enemy.JumpTo(board[i, j]);
+                }
             }
         }
     }
@@ -44,6 +50,7 @@ public class BoardGenerator : MonoBehaviour
             for (int j = 0; j < height; j++)
             {
                 board[i, j].moveHighlight = active != null && active.CanMoveTo(board[i, j]);
+                board[i, j].attackHighlight = active != null && active.CanAttack(board[i, j]);
             }
         }
     }

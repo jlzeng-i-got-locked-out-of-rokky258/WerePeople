@@ -15,15 +15,19 @@ public class BattleController : MonoBehaviour
     void Start()
     {
         Disable();
+
+        GameController.instance().battle = this;
+        
     }
 
-    void Disable()
+
+    public void Disable()
     {
         combatTime = 1000;
         gameObject.GetComponent<Camera>().enabled = false;
     }
 
-    void Enable()
+    public void Enable()
     {
         combatTime = 0;
         gameObject.GetComponent<Camera>().enabled = true;

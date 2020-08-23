@@ -16,12 +16,6 @@ public class BoardTargetHover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameController.hovered == gameObject)
-        {
-            moveIcon.GetComponent<SpriteRenderer>().color = Color.blue;
-        } else
-        {
-            moveIcon.GetComponent<SpriteRenderer>().color = Color.cyan;
-        }
+        moveIcon.GetComponent<IconBob>().highlighted = gameController.hovered == gameObject;
     }
 }

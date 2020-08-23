@@ -10,6 +10,7 @@ public class IconBob : MonoBehaviour
     private float time;
     public float bobAmount = 0.1f;
     public float bobTime = 1f;
+    public bool highlighted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +22,6 @@ public class IconBob : MonoBehaviour
     {
         time += Time.deltaTime;
         transform.position = startPos + new Vector3(0, (float) Math.Sin(time / bobTime) * bobAmount, 0);
+        transform.localScale = highlighted ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(0.5f, 0.5f, 0.5f);
     }
 }

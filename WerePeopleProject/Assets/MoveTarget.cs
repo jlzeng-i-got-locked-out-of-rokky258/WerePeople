@@ -22,6 +22,7 @@ public class MoveTarget : MonoBehaviour
     void Update()
     {
         moveHighlightObject.GetComponent<SpriteRenderer>().enabled = moveHighlight;
+        attackHighlightObject.GetComponent<SpriteRenderer>().enabled = attackHighlight;
     }
 
 

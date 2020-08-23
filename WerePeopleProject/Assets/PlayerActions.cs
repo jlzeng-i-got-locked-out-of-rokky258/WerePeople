@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Principal;
 using UnityEngine;
 
@@ -23,18 +24,27 @@ public class PlayerActions : MonoBehaviour
     public int movementLength, attackRange;
 
     // Variables related to grid positioning.
-    private MoveTarget location;
+    public MoveTarget location;
 
     private float time = 0;
 
-    private bool hasMoved, hasAttacked = false;
+    // Variables related to combat stats.
+    public int remainingMoves;
+    public bool hasAttacked;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         offset = new Vector3(0f, 1f, 0f);
         targetPosition = this.gameObject.transform.position;
         lastPosition = this.gameObject.transform.position;
+        Refresh();
+    }
+
+    public void Refresh()
+    {
+        remainingMoves = movementLength;
+        hasAttacked = false;
     }
 
     // Update is called once per frame
@@ -51,7 +61,7 @@ public class PlayerActions : MonoBehaviour
     // Whether the unit can be activated.
     public bool IsActive()
     {
-        return !hasMoved || !hasAttacked;
+        return remainingMoves > 0 || !hasAttacked;
     }
 
 
@@ -60,23 +70,50 @@ public class PlayerActions : MonoBehaviour
     // CanMoveTo is also used to figure out which grid tiles to highlight for potential movement.
     public bool CanMoveTo(MoveTarget tile)
     {
+        if (tile == location) return false;
         if (location == null) return tile.IsPassable();
-        Vector2 tileCoords = tile.gridCoords;
-        Vector2 gridCoords = location.gridCoords;
         //return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
-        return tile.IsPassable() && ((Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) <= movementLength));
+        return tile.IsPassable() && Distance(tile) <= remainingMoves;
     }
       public bool CanAttack(MoveTarget tile)
     {
+        if (tile == location) return false;
+        if (location == null) return false;
+        //return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
+        return !tile.IsPassable() && Distance(tile) <= attackRange;
+    }
+
+    public int Distance(MoveTarget tile)
+    {
+
+        if (location == null || tile == location) return 0;
         Vector2 tileCoords = tile.gridCoords;
         Vector2 gridCoords = location.gridCoords;
-        //return tile.IsPassable() && ((Math.Abs(tileCoords.x - gridCoords.x) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) <= 1 && Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) != 0));
-        return !tile.IsPassable() && ((Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x) = attackRange));
+        return (int) Math.Round(Math.Abs(tileCoords.y - gridCoords.y) + Math.Abs(tileCoords.x - gridCoords.x));
+    }
+
+    public void JumpTo(MoveTarget tile)
+    {
+        if (location != null)
+        {
+            location.occupant = null;
+        }
+        location = tile;
+        location.occupant = this.gameObject;
+        Debug.Log(offset);
+        
+        targetPosition = tile.gameObject.transform.position + offset;
+        lastPosition = targetPosition;
+        percentToTarget = 1;
+        secondsToTarget = 0;
+
+        gameObject.transform.position = targetPosition;
     }
     public void MoveTo(MoveTarget tile)
     {
-        if (CanMoveTo(tile) && !hasMoved)
+        if (CanMoveTo(tile))
         {
+            remainingMoves -= Distance(tile);
             if (location != null)
             {
                 location.occupant = null;
@@ -94,6 +131,22 @@ public class PlayerActions : MonoBehaviour
             Debug.Log("Can't move there!");
             Debug.Log(location.gridCoords);
             Debug.Log(tile.gridCoords);
+        }
+    }
+
+    public bool Attack(GameObject enemy)
+    {
+        PlayerActions actions = enemy.GetComponent<PlayerActions>();
+        if (CanAttack(actions.location))
+        {
+            hasAttacked = true;
+            Debug.Log("It is marginally effective!");
+            return true;
+        }
+        else
+        {
+            Debug.Log("Can't attack that!");
+            return false;
         }
     }
 }

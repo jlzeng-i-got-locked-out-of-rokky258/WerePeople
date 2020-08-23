@@ -1537,6 +1537,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardMoveTarget: {fileID: 6625386867410910734, guid: ef9537f85dd52db4fabbefcf3a1783db,
     type: 3}
+  enemyPrefab: {fileID: 623305332780139436, guid: 8871de4dbf02c0348bb1f859ab7261e6,
+    type: 3}
 --- !u!4 &2004391804
 Transform:
   m_ObjectHideFlags: 0

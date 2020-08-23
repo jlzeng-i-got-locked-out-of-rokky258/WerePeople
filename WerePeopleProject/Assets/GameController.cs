@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public BoardGenerator board;
     public GameObject hovered;
     static GameObject _instance;
+    public BattleController battle;
 
     public void Update()
     {
@@ -29,5 +30,14 @@ public class GameController : MonoBehaviour
     public void MoveUnitTo(MoveTarget tile)
     {
         selectedUnit?.GetComponent<PlayerActions>().MoveTo(tile);
+    }
+
+    public void AttackUnit(GameObject unitObject)
+    {
+        if (selectedUnit == null) return;
+        if (selectedUnit.GetComponent<PlayerActions>().Attack(unitObject))
+        {
+            battle.Enable();
+        }
     }
 }
