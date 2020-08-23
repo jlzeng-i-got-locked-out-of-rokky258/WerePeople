@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: e68c5da848d7d8e4b8928527fce14e0e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Walmartbrandgoogle
+  fontNames:
+  - Walmartbrandgoogle
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 93e0e3dec2882244dae3eb3c76a863eb, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
