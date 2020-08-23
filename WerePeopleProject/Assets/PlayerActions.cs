@@ -21,8 +21,8 @@ public class PlayerActions : MonoBehaviour
 
     public BillboardFace sprite;
 
-    public int movementLength, attackRange;
-
+    public int movementLength, attackRange, atk, spd, hp, def, maxHP;
+    public string unitname;
     // Variables related to grid positioning.
     public MoveTarget location;
 
@@ -32,6 +32,7 @@ public class PlayerActions : MonoBehaviour
     public int remainingMoves;
     public bool hasAttacked;
     
+
     // Start is called before the first frame update
     void Awake()
     {
