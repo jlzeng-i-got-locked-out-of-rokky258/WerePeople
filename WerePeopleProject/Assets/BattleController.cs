@@ -27,9 +27,11 @@ public class BattleController : MonoBehaviour
         gameObject.GetComponent<Camera>().enabled = false;
     }
 
-    public void Enable()
+    public void Enable(Sprite sprite1, Sprite sprite2)
     {
         combatTime = 0;
+        leftCombat.GetComponent<SpriteRenderer>().sprite = sprite2;
+        rightCombat.GetComponent<SpriteRenderer>().sprite = sprite1;
         gameObject.GetComponent<Camera>().enabled = true;
     }
 
@@ -37,7 +39,7 @@ public class BattleController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Enable();
+            Enable(leftCombat.GetComponent<SpriteRenderer>().sprite, rightCombat.GetComponent<SpriteRenderer>().sprite);
         }
     }
 

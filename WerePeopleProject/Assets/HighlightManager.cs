@@ -24,7 +24,7 @@ public class HighlightManager : MonoBehaviour
         transform.localScale = gameController.selectedUnit == this.gameObject ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(1.0f, 1.0f, 1.0f);
        
         sprite.color = gameController.hovered == this.gameObject ? Color.red : Color.white;
-        if(gameController.selectedUnit == this.gameObject){
+        if(gameController.selectedUnit == this.gameObject && nameT != null){
             
             nameT.text = playeractions.unitname;
             spdT.text = "Spd: " + playeractions.spd;

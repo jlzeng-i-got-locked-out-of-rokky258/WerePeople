@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
         if (selectedUnit == null) return;
         if (selectedUnit.GetComponent<PlayerActions>().Attack(unitObject))
         {
-            battle.Enable();
+            battle.Enable(selectedUnit.GetComponent<PlayerActions>().sprite.gameObject.GetComponent<SpriteRenderer>().sprite, unitObject.GetComponent<PlayerActions>().sprite.gameObject.GetComponent<SpriteRenderer>().sprite);
         }
     }
 }
